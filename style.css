@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+    --ff-primary: 'Roboto', sans-serif;
+    --ff-secondary: 'Roboto Mono', sans-serif;
+
+    --bg-body: #000;
+    --bg-input: #06181C;
+    --bg-fav-button: #065E7C;
+    --bg-thead: #092D38;
+    --bg-odd-row: #06181C;
+    --bg-even-row: #030B0D;
+    --fc-placeholder: #7C7C8A;
+    --fc-fav-button: #FFF;
+    --fc-primary-color: #E1E1E6;
+    --fc-remove-button: #F75A68;
+    --fc-empty-table: #4E5455;
+}
+
+body {
+    font-size: 1.6rem;
+    background-color: var(--bg-body);
+}
+
+body,
+button {
+    font-family: var(--ff-primary);
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8.5rem;
+    width: 100%;
+}
+
+.sr-only {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+}
+
+.input-search {
+    padding: 1.6rem;
+    background: var(--bg-input);
+    width: clamp(20rem, 5vw + 5rem, 48rem);
+    height: 4.8rem;
+    border-radius: .5rem;
+    border: none;
+    box-shadow: 0 1rem 1rem -.7rem rgba(255, 255, 255, 0.1);
+}
+
+.input-search::placeholder {
+    color: var(--fc-placeholder);
+}
+
+.search button {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    height: 4.8rem;
+    width: 17rem;
+    padding: 1.2rem 3.2rem;
+    background: var(--bg-fav-button);
+    color: var(--fc-fav-button);
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.search button:hover {
+    background: var(--fc-fav-button);
+    color: var(--bg-fav-button);
+}
+
+.search button:hover svg path {
+    fill: var(--bg-fav-button);
+}
+
+table {
+    color: var(--fc-primary-color);
+    max-width: 70rem;
+    width: 100%;
+    border-radius: 1.2rem;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 1rem 2rem -1.2rem rgba(255, 255, 255, 0.1);
+}
+
+table thead {
+    background-color: var(--bg-thead);
+}
+
+thead th {
+    padding: 1.6rem 2.4rem 1.6rem;
+    text-align: left;
+}
+
+thead th:first-child {
+    border-radius: 1.2rem 0 0 0;
+}
+
+thead th:last-child {
+    border-radius: 0 1.2rem 0 0;
+}
+
+tbody {
+    border: 2px solid var(--bg-even-row);
+
+}
+
+tbody tr:nth-child(even) {
+    background: var(--bg-even-row);
+}
+
+tbody tr:nth-child(odd) {
+    background: var(--bg-odd-row);
+}
+
+tbody td {
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+td.user {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+td.user img {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+td.user a {
+    text-decoration: none;
+    color: var(--fc-primary-color);
+}
+
+td.user a span {
+    font-weight: 400;
+}
+
+td button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--fc-remove-button);
+    font-weight: bold;
+    font-size: 1.8rem;
+    line-height: 3.2rem;
+}
+
+tbody::-webkit-scrollbar {
+    width: .6rem;
+    cursor: pointer;
+}
+
+tbody::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background: #4A808C;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.empty {
+    max-width: 70rem;
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fc-empty-table);
+    gap: 6rem;
+}
+
+.empty .empty-content {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+}
+
+.empty-content p {
+    font-family: var(--ff-secondary);
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.hide {
+    display: none;
+}
+
+@media (max-width: 780px) {
+    header {
+        flex-direction: column;
+        gap: 4rem;
+    }
+}
