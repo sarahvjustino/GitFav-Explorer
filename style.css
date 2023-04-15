@@ -71,6 +71,7 @@ header {
 }
 
 .input-search {
+    color: var(--fc-fav-button);
     padding: 1.6rem;
     background: var(--bg-input);
     width: clamp(20rem, 5vw + 5rem, 48rem);
@@ -232,11 +233,55 @@ tbody::-webkit-scrollbar-thumb {
 
 .hide {
     display: none;
+    transition: display .5s ease;
 }
 
 @media (max-width: 780px) {
     header {
         flex-direction: column;
         gap: 4rem;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .search {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .repositories,
+    .followers,
+    thead tr th:nth-child(2),
+    thead tr th:nth-child(3) {
+        display: none;
+    }
+
+    .empty {
+        margin-top: 1rem;
+        height: auto;
+        width: auto;
+    }
+
+
+    .empty .empty-content {
+        display: flex;
+        align-items: center;
+        gap: 6rem;
+    }
+
+    .empty-content p {
+        font-size: 1.6rem;
+    }
+
+    tbody td {
+        font-size: 1.8rem;
     }
 }

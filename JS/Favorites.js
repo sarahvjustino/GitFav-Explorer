@@ -1,3 +1,5 @@
+import { githubUsers } from "./githubUsers.js";
+
 export class Favorites {
     constructor(root) {
         this.root = document.querySelector(root)
@@ -5,7 +7,35 @@ export class Favorites {
     }
 
     load() {
-        this.entries = JSON.parse(localStorage.getItem('@github-favorites:')) || [];
+        this.entries = JSON.parse(localStorage.getItem('@github-fav')) || [];
+    }
+
+    save() {
+        localStorage.setItem('@github-fav', JSON.stringify(this.entries));
+    }
+
+    async add(username) {
+        try {
+
+            const userExists = this.entries.find(entry => entry.login === username);
+
+            if (userExists) {
+                throw new Error('Usúario já cadastrado!')
+            }
+
+            const user = await githubUsers.search(username);
+
+            if (user.login === undefined) {
+                throw new Error('Usúario não existe!')
+            }
+
+            this.entries = [user, ...this.entries];
+            this.update();
+            this.save();
+        } catch (error) {
+            alert(error.message);
+        }
+
     }
 
     delete(user) {
@@ -13,6 +43,7 @@ export class Favorites {
 
         this.entries = filteredEntries;
         this.update()
+        this.save()
     }
 }
 
@@ -21,6 +52,7 @@ export class FavoritesView extends Favorites {
         super(root)
         this.tbody = this.root.querySelector('table tbody');
         this.update()
+        this.onadd()
     }
 
     update() {
@@ -43,6 +75,23 @@ export class FavoritesView extends Favorites {
                 this.delete(user)
             }
         })
+
+        const empty = this.root.querySelector('.empty');
+
+        if (this.entries.length === 0) {
+            empty.classList.remove('hide');
+        } else {
+            empty.classList.add('hide');
+        }
+    }
+
+    onadd() {
+        const addButton = this.root.querySelector('.search button');
+        addButton.onclick = () => {
+            const { value } = this.root.querySelector(".input-search");
+
+            this.add(value)
+        }
     }
 
     createRow() {
@@ -73,7 +122,6 @@ export class FavoritesView extends Favorites {
     }
 
     removeAllTr() {
-
         this.tbody.querySelectorAll('tr').forEach(tr => {
             tr.remove()
         });
